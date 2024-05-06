@@ -1,0 +1,92 @@
+//Example Queries
+
+query getBook {
+  books {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+
+query getAuthors {
+  authors {
+    id
+    name
+    country
+    books {
+      id
+      title
+      genre
+    }
+  }
+}
+
+mutation update($id: ID!, $edits: updateBook) {
+  updateBook(id: $id, edits: $edits) {
+    id
+    title
+    genre
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation bookCreate($book: createBook) {
+  createBook(book: $book) {
+    title
+    author {
+      name
+      books {
+        title
+      }
+    }
+  }
+}
+
+mutation delete($id: ID!) {
+  deleteBook(id: $id) {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+
+mutation updateAuthor($Authorid: ID!, $editsAuthor: updateAuthor) {
+  updateAuthor(id: $Authorid, edits: $editsAuthor) {
+    id
+    name
+    books {
+      id
+      title
+    }
+  }
+}
+
+
+//Query Variables
+{
+  "id": "<Book_id>",
+  "Authorid": "<Author_id>",
+  "edits": {
+    "title": "H.P. and the Chamber of Secrets",
+    "genre": "Mystery",
+    "authorName": "J. K. Rowling"
+  },
+  "book": {
+    "title": "H.P. and the Chamber of Secrets",
+    "genre": "Mystery",
+    "authorName": "J.K. Rowling"
+  },
+  "editsAuthor": {
+    "name": "J.K. Rowling",
+    "country": "UK"
+  }
+}
